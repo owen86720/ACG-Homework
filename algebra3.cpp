@@ -49,7 +49,6 @@
 #include "algebra3.h"
 #include <math.h>
 #include <ctype.h>
-
 /****************************************************************
 *								*
 *		    vec2 Member functions			*
@@ -540,8 +539,7 @@ float operator*(const vec3 &a, const vec3 &b)
 vec3 operator/(const vec3 &a, const float d)
 {
   float d_inv = 1. / d;
-  return vec3(a.n[VX] * d_inv, a.n[VY] * d_inv,
-              a.n[VZ] * d_inv);
+  return vec3(a.n[VX] * d_inv, a.n[VY] * d_inv, a.n[VZ] * d_inv);
 }
 
 vec3 operator^(const vec3 &a, const vec3 &b)
@@ -561,9 +559,11 @@ int operator!=(const vec3 &a, const vec3 &b)
   return !(a == b);
 }
 
-/*ostream& operator << (ostream& s, vec3& v)
-{ return s << "| " << v.n[VX] << ' ' << v.n[VY] << ' ' << v.n[VZ] << " |"; }
-
+ostream &operator<<(ostream &s, vec3 &v)
+{
+  return s << "| " << v.n[VX] << ' ' << v.n[VY] << ' ' << v.n[VZ] << " |";
+}
+/*
 istream& operator >> (istream& s, vec3& v) {
     vec3	v_tmp;
     char	c = ' ';
@@ -1067,9 +1067,13 @@ int operator!=(const mat3 &a, const mat3 &b)
   return !(a == b);
 }
 
-/*ostream& operator << (ostream& s, mat3& m)
-{ return s << m.v[VX] << '\n' << m.v[VY] << '\n' << m.v[VZ]; }
-
+ostream &operator<<(ostream &s, mat3 &m)
+{
+  return s << m.v[VX] << '\n'
+           << m.v[VY] << '\n'
+           << m.v[VZ];
+}
+/*
 istream& operator >> (istream& s, mat3& m) {
     mat3    m_tmp;
 
