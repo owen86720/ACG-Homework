@@ -6,21 +6,25 @@
 #include <vector>
 #include <fstream>
 
-using namespace std;
+#define PI 3.1415926535898
+#define Tan(th) tan(PI / 180 * (th))
+//using namespace std;
 
 int nx, ny;
+float angle;
 
-vec3 eye, screenUL, horizontal, vertical;
-vector<vec4> Sphere;
-vector<vec3> Triangle; //,Screen
+vec3 eye, scrCenter, horizontal, vertical, view;
+std::vector<vec4> Sphere;
+std::vector<vec3> Triangle; //,Screen
 
 void readFile()
 {
-    float SOx, SOy, SOz, Sr;
-    float Ax, Ay, Az, Bx, By, Bz, Cx, Cy, Cz; //, Dx, Dy, Dz;
+    float angle, SOx, SOy, SOz, Sr;
+    float Ax, Ay, Az, Bx, By, Bz, Cx, Cy, Cz;
+    vec3 U;
 
-    ifstream ifile("hw1_input.txt");
-    string test;
+    std::ifstream ifile("hw2_input.txt");
+    std::string test;
     while (ifile >> test)
     {
         switch (test[0])
@@ -28,21 +32,23 @@ void readFile()
         case 'E':
             ifile >> eye[0] >> eye[1] >> eye[2];
             break;
-        case 'O':
-            ifile >> screenUL[0] >> screenUL[1] >> screenUL[2] >> Ax >> Ay >> Az >> Bx >> By >> Bz >> Cx >> Cy >> Cz;
-            horizontal = vec3(Ax - screenUL[0], Ay - screenUL[1], Az - screenUL[2]);
-            vertical = vec3(Bx - screenUL[0], By - screenUL[1], Bz - screenUL[2]);
-            //cout << "h:" << horizontal << "\nv:" << vertical << "\n";
-            //Screen.push_back(vec3(Ax, Ay, Az));
-            //Screen.push_back(vec3(Bx, By, Bz));
-            //Screen.push_back(vec3(Cx, Cy, Cz));
-            //Screen.push_back(vec3(Dx, Dy, Dz));
+        case 'V':
+            ifile >> view[0] >> view[1] >> view[2] >> U[0] >> U[1] >> U[2];
+            horizontal = (view * 8 ^ U).normalize();
+            vertical = (horizontal ^ view).normalize();
+            std::cout << "h:" << horizontal << "\nv:" << vertical << "\n";
+            break;
+        case 'F':
+            ifile >> angle;
+            horizontal = horizontal * view.length() * Tan(angle / 2);
+            vertical = vertical * view.length() * Tan(angle / 2);
+            scrCenter = eye + view + horizontal + vertical;
             break;
         case 'R':
             ifile >> nx >> ny;
-            horizontal = horizontal / nx;
-            vertical = vertical / ny;
-            cout << "h:" << horizontal << "\nv:" << vertical << "\n";
+            horizontal = horizontal / nx * 2;
+            vertical = vertical / ny * 2;
+            //std::cout << "h:" << horizontal << "\nv:" << vertical << "\n";
             break;
         case 'S':
             ifile >> SOx >> SOy >> SOz >> Sr;
@@ -113,7 +119,7 @@ int main()
     {
         for (int i = 0; i < nx; i++)
         {
-            scrLoc = screenUL + i * horizontal + j * vertical;
+            scrLoc = scrCenter - i * horizontal - j * vertical;
             //cout << scrLoc << "\n";
             ray ray(eye, scrLoc - eye);
             for (int s = 0; s < Sphere.size(); ++s)

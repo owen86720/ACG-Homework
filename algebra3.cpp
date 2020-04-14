@@ -267,9 +267,10 @@ int operator!=(const vec2 &a, const vec2 &b)
   return !(a == b);
 }
 
-/*ostream& operator << (ostream& s, vec2& v)
-{ return s << "| " << v.n[VX] << ' ' << v.n[VY] << " |"; }
-*/
+std::ostream &operator<<(std::ostream &s, vec2 &v)
+{
+  return s << "| " << v.n[VX] << ' ' << v.n[VY] << " |";
+}
 
 /*istream& operator >> (istream& s, vec2& v) {
     vec2	v_tmp;
@@ -559,7 +560,7 @@ int operator!=(const vec3 &a, const vec3 &b)
   return !(a == b);
 }
 
-ostream &operator<<(ostream &s, vec3 &v)
+std::ostream &operator<<(std::ostream &s, vec3 &v)
 {
   return s << "| " << v.n[VX] << ' ' << v.n[VY] << ' ' << v.n[VZ] << " |";
 }
@@ -1067,7 +1068,7 @@ int operator!=(const mat3 &a, const mat3 &b)
   return !(a == b);
 }
 
-ostream &operator<<(ostream &s, mat3 &m)
+std::ostream &operator<<(std::ostream &s, mat3 &m)
 {
   return s << m.v[VX] << '\n'
            << m.v[VY] << '\n'

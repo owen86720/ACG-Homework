@@ -57,7 +57,7 @@
 #include <stdlib.h>
 #include <iostream>
 
-using namespace std;
+//using namespace std;
 // this line defines a new type: pointer to a function which returns a
 // float and takes as argument a float
 typedef float (*V_FCT_PTR)(float);
@@ -182,19 +182,19 @@ public:
 
   // friends
 
-  friend vec2 operator-(const vec2 &v);                 // -v1
-  friend vec2 operator+(const vec2 &a, const vec2 &b);  // v1 + v2
-  friend vec2 operator-(const vec2 &a, const vec2 &b);  // v1 - v2
-  friend vec2 operator*(const vec2 &a, const float d);  // v1 * 3.0
-  friend vec2 operator*(const float d, const vec2 &a);  // 3.0 * v1
-  friend vec2 operator*(const mat3 &a, const vec2 &v);  // M . v
-  friend vec2 operator*(const vec2 &v, mat3 &a);        // v . M
-  friend float operator*(const vec2 &a, const vec2 &b); // dot product
-  friend vec2 operator/(const vec2 &a, const float d);  // v1 / 3.0
-  friend vec3 operator^(const vec2 &a, const vec2 &b);  // cross product
-  friend int operator==(const vec2 &a, const vec2 &b);  // v1 == v2 ?
-  friend int operator!=(const vec2 &a, const vec2 &b);  // v1 != v2 ?
-  friend ostream &operator<<(ostream &s, vec2 &v);      // output to stream
+  friend vec2 operator-(const vec2 &v);                      // -v1
+  friend vec2 operator+(const vec2 &a, const vec2 &b);       // v1 + v2
+  friend vec2 operator-(const vec2 &a, const vec2 &b);       // v1 - v2
+  friend vec2 operator*(const vec2 &a, const float d);       // v1 * 3.0
+  friend vec2 operator*(const float d, const vec2 &a);       // 3.0 * v1
+  friend vec2 operator*(const mat3 &a, const vec2 &v);       // M . v
+  friend vec2 operator*(const vec2 &v, mat3 &a);             // v . M
+  friend float operator*(const vec2 &a, const vec2 &b);      // dot product
+  friend vec2 operator/(const vec2 &a, const float d);       // v1 / 3.0
+  friend vec3 operator^(const vec2 &a, const vec2 &b);       // cross product
+  friend int operator==(const vec2 &a, const vec2 &b);       // v1 == v2 ?
+  friend int operator!=(const vec2 &a, const vec2 &b);       // v1 != v2 ?
+  friend std::ostream &operator<<(std::ostream &s, vec2 &v); // output to stream
   //friend istream& operator >> (istream& s, vec2& v);	    // input from strm.
   friend void swap(vec2 &a, vec2 &b);             // swap v1 & v2
   friend vec2 min(const vec2 &a, const vec2 &b);  // min(v1, v2)
@@ -250,19 +250,19 @@ public:
 
   // friends
 
-  friend vec3 operator-(const vec3 &v);                 // -v1
-  friend vec3 operator+(const vec3 &a, const vec3 &b);  // v1 + v2
-  friend vec3 operator-(const vec3 &a, const vec3 &b);  // v1 - v2
-  friend vec3 operator*(const vec3 &a, const float d);  // v1 * 3.0
-  friend vec3 operator*(const float d, const vec3 &a);  // 3.0 * v1
-  friend vec3 operator*(const mat4 &a, const vec3 &v);  // M . v
-  friend vec3 operator*(const vec3 &v, mat4 &a);        // v . M
-  friend float operator*(const vec3 &a, const vec3 &b); // dot product
-  friend vec3 operator/(const vec3 &a, const float d);  // v1 / 3.0
-  friend vec3 operator^(const vec3 &a, const vec3 &b);  // cross product
-  friend int operator==(const vec3 &a, const vec3 &b);  // v1 == v2 ?
-  friend int operator!=(const vec3 &a, const vec3 &b);  // v1 != v2 ?
-  friend ostream &operator<<(ostream &s, vec3 &v);      // output to stream
+  friend vec3 operator-(const vec3 &v);                      // -v1
+  friend vec3 operator+(const vec3 &a, const vec3 &b);       // v1 + v2
+  friend vec3 operator-(const vec3 &a, const vec3 &b);       // v1 - v2
+  friend vec3 operator*(const vec3 &a, const float d);       // v1 * 3.0
+  friend vec3 operator*(const float d, const vec3 &a);       // 3.0 * v1
+  friend vec3 operator*(const mat4 &a, const vec3 &v);       // M . v
+  friend vec3 operator*(const vec3 &v, mat4 &a);             // v . M
+  friend float operator*(const vec3 &a, const vec3 &b);      // dot product
+  friend vec3 operator/(const vec3 &a, const float d);       // v1 / 3.0
+  friend vec3 operator^(const vec3 &a, const vec3 &b);       // cross product
+  friend int operator==(const vec3 &a, const vec3 &b);       // v1 == v2 ?
+  friend int operator!=(const vec3 &a, const vec3 &b);       // v1 != v2 ?
+  friend std::ostream &operator<<(std::ostream &s, vec3 &v); // output to stream
   //friend istream& operator >> (istream& s, vec3& v);	    // input from strm.
   friend void swap(vec3 &a, vec3 &b);             // swap v1 & v2
   friend vec3 min(const vec3 &a, const vec3 &b);  // min(v1, v2)
@@ -321,18 +321,18 @@ public:
 
   // friends
 
-  friend vec4 operator-(const vec4 &v);                 // -v1
-  friend vec4 operator+(const vec4 &a, const vec4 &b);  // v1 + v2
-  friend vec4 operator-(const vec4 &a, const vec4 &b);  // v1 - v2
-  friend vec4 operator*(const vec4 &a, const float d);  // v1 * 3.0
-  friend vec4 operator*(const float d, const vec4 &a);  // 3.0 * v1
-  friend vec4 operator*(const mat4 &a, const vec4 &v);  // M . v
-  friend vec4 operator*(const vec4 &v, mat4 &a);        // v . M
-  friend float operator*(const vec4 &a, const vec4 &b); // dot product
-  friend vec4 operator/(const vec4 &a, const float d);  // v1 / 3.0
-  friend int operator==(const vec4 &a, const vec4 &b);  // v1 == v2 ?
-  friend int operator!=(const vec4 &a, const vec4 &b);  // v1 != v2 ?
-  friend ostream &operator<<(ostream &s, vec4 &v);      // output to stream
+  friend vec4 operator-(const vec4 &v);                      // -v1
+  friend vec4 operator+(const vec4 &a, const vec4 &b);       // v1 + v2
+  friend vec4 operator-(const vec4 &a, const vec4 &b);       // v1 - v2
+  friend vec4 operator*(const vec4 &a, const float d);       // v1 * 3.0
+  friend vec4 operator*(const float d, const vec4 &a);       // 3.0 * v1
+  friend vec4 operator*(const mat4 &a, const vec4 &v);       // M . v
+  friend vec4 operator*(const vec4 &v, mat4 &a);             // v . M
+  friend float operator*(const vec4 &a, const vec4 &b);      // dot product
+  friend vec4 operator/(const vec4 &a, const float d);       // v1 / 3.0
+  friend int operator==(const vec4 &a, const vec4 &b);       // v1 == v2 ?
+  friend int operator!=(const vec4 &a, const vec4 &b);       // v1 != v2 ?
+  friend std::ostream &operator<<(std::ostream &s, vec4 &v); // output to stream
   //friend istream& operator >> (istream& s, vec4& v);	    // input from strm.
   friend void swap(vec4 &a, vec4 &b);             // swap v1 & v2
   friend vec4 min(const vec4 &a, const vec4 &b);  // min(v1, v2)
@@ -385,16 +385,16 @@ public:
 
   // friends
 
-  friend mat3 operator-(const mat3 &a);                // -m1
-  friend mat3 operator+(const mat3 &a, const mat3 &b); // m1 + m2
-  friend mat3 operator-(const mat3 &a, const mat3 &b); // m1 - m2
-  friend mat3 operator*(mat3 &a, mat3 &b);             // m1 * m2
-  friend mat3 operator*(const mat3 &a, const float d); // m1 * 3.0
-  friend mat3 operator*(const float d, const mat3 &a); // 3.0 * m1
-  friend mat3 operator/(const mat3 &a, const float d); // m1 / 3.0
-  friend int operator==(const mat3 &a, const mat3 &b); // m1 == m2 ?
-  friend int operator!=(const mat3 &a, const mat3 &b); // m1 != m2 ?
-  friend ostream &operator<<(ostream &s, mat3 &m);     // output to stream
+  friend mat3 operator-(const mat3 &a);                      // -m1
+  friend mat3 operator+(const mat3 &a, const mat3 &b);       // m1 + m2
+  friend mat3 operator-(const mat3 &a, const mat3 &b);       // m1 - m2
+  friend mat3 operator*(mat3 &a, mat3 &b);                   // m1 * m2
+  friend mat3 operator*(const mat3 &a, const float d);       // m1 * 3.0
+  friend mat3 operator*(const float d, const mat3 &a);       // 3.0 * m1
+  friend mat3 operator/(const mat3 &a, const float d);       // m1 / 3.0
+  friend int operator==(const mat3 &a, const mat3 &b);       // m1 == m2 ?
+  friend int operator!=(const mat3 &a, const mat3 &b);       // m1 != m2 ?
+  friend std::ostream &operator<<(std::ostream &s, mat3 &m); // output to stream
   //friend istream& operator >> (istream& s, mat3& m);	    // input from strm.
   friend void swap(mat3 &a, mat3 &b); // swap m1 & m2
 
