@@ -29,16 +29,18 @@ public:
         auto Id = MAX(L * normal, 0) * _color;
         auto Is = pow(H * normal, _ex) * _color;
         auto I = Ia * _Ka + Id * _Kd + Is * _Ks;
-        //auto I = Id * _Kd;
-        unsigned char r, g, b;
 
-        r = MIN(I[0], 255);
-        g = MIN(I[1], 255);
-        b = MIN(I[2], 255);
+        I[0] = MIN(I[0], 255);
+        I[1] = MIN(I[1], 255);
+        I[2] = MIN(I[2], 255);
 
-        Pixel colorOut = {(unsigned char)(r), (unsigned char)(g), (unsigned char)(b)};
+        Pixel colorOut = {(unsigned char)(I[0]), (unsigned char)(I[1]), (unsigned char)(I[2])};
 
         return colorOut;
+    }
+    float getReflect()
+    {
+        return _Reflect;
     }
 
 private:

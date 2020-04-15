@@ -27,11 +27,14 @@ public:
         return false;
     }
 
-    Pixel raytrace(ray y)
+    Pixel raytrace(ray y, int count)
     {
+        float ref;
+        if (count == 0)
+            return Pixel{0, 0, 0};
+
         Pixel closest;
         auto closestLen = 99999999;
-        vec3 closestP;
         for (int s = 0; s < _spheres.size(); ++s)
         {
             if (_spheres.at(s).hit(y))
@@ -41,7 +44,9 @@ public:
                 {
                     closestLen = temp;
                     closest = _spheres.at(s).phongLighting(_light, y.direction());
-                    closestP = _spheres.at(s).hitPoint;
+                    _hitP = _spheres.at(s).hitPoint;
+                    _hitPNor = _spheres.at(s).normal;
+                    ref = _spheres.at(s).getReflect();
                 }
             }
         }
@@ -55,23 +60,38 @@ public:
                 {
                     closestLen = temp;
                     closest = _triangles.at(s).phongLighting(_light, y.direction());
-                    closestP = _triangles.at(s).hitPoint;
+                    _hitP = _triangles.at(s).hitPoint;
+                    _hitPNor = _triangles.at(s).normal;
+                    ref = _triangles.at(s).getReflect();
                 }
             }
         }
         if (closestLen != 99999999)
         {
-            if (!isShadow(closestP))
-                return closest;
+            //ax+by+cz=d
+            auto d = _hitPNor * _hitP;
+            auto temp = _hitP + y.direction();
+            auto len = (temp * _hitPNor - d) / _hitPNor.length();
+            auto b = temp - 2 * len * _hitPNor / _hitPNor.length();
+            ray next = ray(_hitP, b - _hitP);
+            if (!isShadow(_hitP))
+                return closest + raytrace(next, count - 1) * ref;
             else
-                return Pixel{0, 0, 0};
+                return Pixel{0, 0, 0} + raytrace(next, count - 1) * ref;
         }
         else
             return Pixel{0, 0, 0};
     }
 
+    // Pixel Run(int count, ray firstR)
+    // {
+    //     return raytrace(firstR, count);
+    // }
+
 private:
     std::vector<sphere> _spheres;
     std::vector<triangle> _triangles;
     vec3 _light;
+    vec3 _hitP;
+    vec3 _hitPNor;
 };

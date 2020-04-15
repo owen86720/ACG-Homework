@@ -4,10 +4,32 @@
 
 #ifndef PIXEL
 #define PIXEL
-typedef struct
+struct Pixel
 {
 	unsigned char R, G, B; // Blue, Green, Red
-} Pixel;
+
+	Pixel operator+(const Pixel &p) const
+	{
+		unsigned char a, b, c;
+		a = (p.R + R) > 255 ? 255 : p.R + R;
+		b = (p.G + G) > 255 ? 255 : p.G + G;
+		c = (p.B + B) > 255 ? 255 : p.B + B;
+		// if ((p.R + R) > 255)
+		// 	a = 255;
+		// else
+		// 	a = p.R + R;
+		return Pixel{a, b, c};
+	}
+
+	Pixel operator*(const float d) const
+	{
+		unsigned char a, b, c;
+		a = (R * d) > 255 ? 255 : R * d;
+		b = (G * d) > 255 ? 255 : G * d;
+		c = (B * d) > 255 ? 255 : B * d;
+		return Pixel{a, b, c};
+	}
+};
 #endif
 
 #ifndef IMAGE_H

@@ -83,7 +83,7 @@ int main()
             scrLoc = scrCenter - i * horizontal - j * vertical;
             //cout << scrLoc << "\n";
             ray ray(eye, scrLoc - eye);
-            img.writePixel(i, j, tr.raytrace(ray));
+            img.writePixel(i, j, tr.raytrace(ray, 1));
         }
     }
     char filename[] = "output.ppm";
