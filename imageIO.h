@@ -2,11 +2,16 @@
 #include <stdlib.h>
 #include <assert.h>
 
-struct Pixel
+#ifndef PIXEL
+#define PIXEL
+typedef struct
 {
 	unsigned char R, G, B; // Blue, Green, Red
-};
+} Pixel;
+#endif
 
+#ifndef IMAGE_H
+#define IMAGE_H
 class ColorImage
 {
 	Pixel *pPixel;
@@ -76,3 +81,5 @@ void ColorImage::outputPPM(char *filename)
 
 	fclose(outFile);
 }
+
+#endif
