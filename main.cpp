@@ -20,7 +20,7 @@ void readFile()
     float r, g, b, Ka, Kd, Ks, ex, ref;
     vec3 U, view;
 
-    std::ifstream ifile("hw2_input.txt");
+    std::ifstream ifile("hw3_input.txt");
     std::string test;
     while (ifile >> test)
     {
@@ -31,7 +31,8 @@ void readFile()
             break;
         case 'V':
             ifile >> view[0] >> view[1] >> view[2] >> U[0] >> U[1] >> U[2];
-            horizontal = (view * 20 ^ U).normalize();
+            view = view.normalize() * 60;
+            horizontal = (view ^ U).normalize();
             vertical = (horizontal ^ view).normalize();
             //std::cout << "h:" << horizontal << "\nv:" << vertical << "\n";
             break;
@@ -74,7 +75,8 @@ int main()
     img.init(nx, ny);
     vec3 scrLoc;
     vec3 hitpoint;
-
+    vec3 eyeA = eye + vec3(0.7, 0, 0);
+    vec3 eyeB = eye + vec3(0, 0.7, 0);
     raytracer tr = raytracer(Spheres, Triangles, light);
     for (int j = 0; j < ny; j++)
     {
@@ -82,8 +84,11 @@ int main()
         {
             scrLoc = scrCenter - i * horizontal - j * vertical;
             //cout << scrLoc << "\n";
-            ray ray(eye, scrLoc - eye);
-            img.writePixel(i, j, tr.raytrace(ray, 1));
+            ray rayO(eye, scrLoc - eye);
+            ray rayA(eyeA, scrLoc - eyeA);
+            ray rayB(eyeB, scrLoc - eyeB);
+            auto col = tr.raytrace(rayO, 1).mean(tr.raytrace(rayA, 1), tr.raytrace(rayB, 1));
+            img.writePixel(i, j, col);
         }
     }
     char filename[] = "output.ppm";

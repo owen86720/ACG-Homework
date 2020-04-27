@@ -26,7 +26,7 @@ bool sphere::hit(const ray r)
 
     if (discriminant > 0)
     {
-        auto t = (-b - sqrt(discriminant)) / 2;
+        auto t = (-b - sqrt(discriminant)) / 2 / a;
         if (t >= 0)
         {
             hitPoint = r.at(t);

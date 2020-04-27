@@ -39,7 +39,7 @@ public:
         {
             if (_spheres.at(s).hit(y))
             {
-                auto temp = (_light - _spheres.at(s).hitPoint).length();
+                auto temp = (y.origin() - _spheres.at(s).hitPoint).length();
                 if (temp < closestLen)
                 {
                     closestLen = temp;
@@ -55,7 +55,7 @@ public:
         {
             if (_triangles.at(s).hit(y))
             {
-                auto temp = (_light - _triangles.at(s).hitPoint).length();
+                auto temp = (y.origin() - _triangles.at(s).hitPoint).length();
                 if (temp < closestLen)
                 {
                     closestLen = temp;
@@ -77,7 +77,8 @@ public:
             if (!isShadow(_hitP))
                 return closest + raytrace(next, count - 1) * ref;
             else
-                return Pixel{0, 0, 0} + raytrace(next, count - 1) * ref;
+                //    return Pixel{0, 0, 0} + raytrace(next, count - 1) * ref;
+                return closest + raytrace(next, count - 1) * ref;
         }
         else
             return Pixel{0, 0, 0};

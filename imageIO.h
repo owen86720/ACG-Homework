@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <iostream>
 
 #ifndef PIXEL
 #define PIXEL
@@ -27,6 +28,15 @@ struct Pixel
 		a = (R * d) > 255 ? 255 : R * d;
 		b = (G * d) > 255 ? 255 : G * d;
 		c = (B * d) > 255 ? 255 : B * d;
+		return Pixel{a, b, c};
+	}
+
+	Pixel mean(const Pixel &x, const Pixel &y) const
+	{
+		unsigned char a, b, c;
+		a = (x.R + y.R + R) / 3;
+		b = (x.G + y.G + G) / 3;
+		c = (x.B + y.B + B) / 3;
 		return Pixel{a, b, c};
 	}
 };
