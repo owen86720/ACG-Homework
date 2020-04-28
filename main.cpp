@@ -1,6 +1,7 @@
 #include "raytracer.h"
 #include "imageIO.h"
 
+#include <ctime>
 #include <vector>
 #include <fstream>
 
@@ -75,8 +76,9 @@ int main()
     img.init(nx, ny);
     vec3 scrLoc;
     vec3 hitpoint;
-    vec3 eyeA = eye + vec3(0.7, 0, 0);
-    vec3 eyeB = eye + vec3(0, 0.7, 0);
+
+    srand(time(NULL));
+
     raytracer tr = raytracer(Spheres, Triangles, light);
     for (int j = 0; j < ny; j++)
     {
@@ -84,6 +86,8 @@ int main()
         {
             scrLoc = scrCenter - i * horizontal - j * vertical;
             //cout << scrLoc << "\n";
+            vec3 eyeA = eye + vec3((double)rand() / (RAND_MAX + 1.0), (double)rand() / (RAND_MAX + 1.0), (double)rand() / (RAND_MAX + 1.0)).normalize() * 0.7;
+            vec3 eyeB = eye + vec3((double)rand() / (RAND_MAX + 1.0), (double)rand() / (RAND_MAX + 1.0), (double)rand() / (RAND_MAX + 1.0)).normalize() * 0.7;
             ray rayO(eye, scrLoc - eye);
             ray rayA(eyeA, scrLoc - eyeA);
             ray rayB(eyeB, scrLoc - eyeB);
